@@ -16,7 +16,7 @@ export const useImageSearch = () => {
     if (!loading && hasMore && searchTerm && hasSearched) {
       const nextPage = currentPage + 1;
       setCurrentPage(nextPage);
-      searchPhotos(searchTerm, nextPage, true);
+      searchPhotos(nextPage, true);
     }
   };
 
@@ -25,6 +25,7 @@ export const useImageSearch = () => {
     const observer = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting && hasMore && !loading) {
+
           loadMorePhotos();
         }
       },
@@ -41,11 +42,12 @@ export const useImageSearch = () => {
         observer.unobserve(sentinel);
       }
     };
+    // eslint-disable-next-line
   }, [hasMore, loading, hasSearched, currentPage]);
 
-  const searchPhotos = async (query: string, page: number = 1, append: boolean = false) => {
+  const searchPhotos = async (page: number = 1, append: boolean = false) => {
     // avoid calling api if query is empty
-    if (!query.trim()) return;
+    if (!searchTerm.trim()) return;
 
     setLoading(true);
     setError('');
@@ -54,18 +56,23 @@ export const useImageSearch = () => {
       const apiKey = process.env.REACT_APP_FLICKR_API_KEY;
 
       if (!apiKey) {
-        throw new Error('API key not found. Please check your .env file.');
+        setError('API key not found. Please check your .env file.');
+        setHasMore(false); // stop infinite scroll retries
+        return;
       }
 
-      const apiPath = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${encodeURIComponent(query)}&format=json&nojsoncallback=1&per_page=30&sort=relevance&page=${page}`
+      const apiPath = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${encodeURIComponent(searchTerm)}&format=json&nojsoncallback=1&per_page=30&sort=relevance&page=${page}`
 
       const response = await fetch(apiPath);
-
+      // check api response code
       if (!response.ok) {
-        throw new Error('Failed to fetch photos');
+        setError('Failed to fetch photos. Please check the API key and network connection.');
+        setHasMore(false); // stop infinite retries
+        return;
       }
       const data: FlickrResponse = await response.json();
 
+      // check response stat value
       if (data.stat === 'ok') {
         const newPhotos = data.photos.photo;
 
@@ -85,11 +92,13 @@ export const useImageSearch = () => {
         setHasMore(totalLoaded < parseInt(data.photos.total));
 
       } else {
-        setError('Failed to load photos');
+        setError('Failed to load photos. Please check the API key and network connection.');
+        setHasMore(false);
       }
     } catch (err) {
       setError('Error fetching photos. Please try again.');
       console.error('Error:', err);
+      setHasMore(false);
     } finally {
       setLoading(false);
     }
@@ -101,7 +110,7 @@ export const useImageSearch = () => {
     setCurrentPage(1);
     setHasMore(true);
     setHasSearched(true);
-    searchPhotos(searchTerm, 1, false);
+    searchPhotos();
   };
 
   return {
