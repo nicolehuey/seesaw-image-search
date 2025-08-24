@@ -68,20 +68,6 @@ Deployed at: https://seesaw-image-search.vercel.app/
 - **Error Handling**: Graceful error handling with user-friendly messages
 - **Mobile Responsive**: Supports viewing in mobile responsive sizes
 
-## 📁 Project Structure
-
-```
-src/
-├── App.tsx                    # Main application component
-├── components/
-│   ├── ImageCard.tsx         # Individual image card component
-│   └── ImageModal.tsx        # Full-size image modal
-├── types/
-│   └── flickr.ts            # TypeScript types for Flickr API
-├── index.tsx                 # Application entry point
-└── index.css                # Global styles with Tailwind
-```
-
 ## 🎯 Key Components
 
 ### ImageCard
