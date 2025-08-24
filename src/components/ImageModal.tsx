@@ -103,7 +103,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ photo, isOpen, onClose }) => {
                 )}
                 <div className="mt-4 flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs sm:text-sm text-gray-500">
                   <span>Photo ID: {photo.id}</span>
-                  <span>Server: {photo.server}</span>
                 </div>
               </div>
               {/* Save button */}

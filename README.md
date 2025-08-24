@@ -1,6 +1,7 @@
 # 📸 Image Search - React TypeScript + Tailwind CSS
 
-A modern image search application built with React, TypeScript, and Tailwind CSS that allows users to search and download beautiful photos from Flickr.
+A modern image search application built with React, TypeScript, and Tailwind CSS that allows users to search and download beautiful photos from Flickr. 
+Deployed at: https://seesaw-image-search.vercel.app/
 
 ## 🚀 Features
 
@@ -52,7 +53,7 @@ A modern image search application built with React, TypeScript, and Tailwind CSS
 
 ### Image Search
 - Real-time search with Flickr's API
-- Displays search results in a beautiful masonry grid
+- Displays search results in a beautiful masonry grid (Pinterest-like)
 - Shows total number of results found
 
 ### Download Functionality
@@ -65,7 +66,7 @@ A modern image search application built with React, TypeScript, and Tailwind CSS
 - **Infinite Scroll**: Automatically loads more images as you scroll down
 - **Loading States**: Beautiful loading animations and skeleton screens
 - **Error Handling**: Graceful error handling with user-friendly messages
-- **Keyboard Navigation**: Full keyboard accessibility support
+- **Mobile Responsive**: Supports viewing in mobile responsive sizes
 
 ## 📁 Project Structure
 
@@ -118,16 +119,5 @@ This project uses Tailwind CSS for styling:
 - `npm start` - Start development server
 - `npm run build` - Build for production
 - `npm run eject` - Eject from Create React App
-
-### Code Quality
-- TypeScript for type safety
-- ESLint for code linting
-- Prettier for code formatting
-
-## 📄 License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----
 
 Happy image searching! 📸✨
