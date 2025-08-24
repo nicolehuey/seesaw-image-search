@@ -10,3 +10,8 @@ export interface ImageCardProps {
     photo: FlickrPhoto;
     onClick: (photo: FlickrPhoto) => void;
 }
+
+export interface SearchDescriptionProps {
+    resultTitle: string;
+    resultDescription: string;
+}

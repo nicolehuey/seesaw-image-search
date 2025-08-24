@@ -3,6 +3,7 @@ import ImageCard from './components/ImageCard';
 import ImageModal from './components/ImageModal';
 import { FlickrPhoto } from './types/flickr';
 import { useImageSearch } from './hooks/useImageSearch';
+import SearchDescription from './components/SearchDescription';
 
 function App() {
   const {
@@ -19,7 +20,6 @@ function App() {
 
   const [selectedPhoto, setSelectedPhoto] = useState<FlickrPhoto | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -98,32 +98,18 @@ function App() {
           </div>
         )}
 
-        {!loading && photos.length === 0 && !error && !hasSearched &&  (
-          <div className="text-center py-8 sm:py-12">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">Start searching for images</h3>
-              <p className="text-sm sm:text-base text-gray-500">Enter a search term above to discover beautiful photos from Flickr</p>
-            </div>
-          </div>
+        {!loading && photos.length === 0 && !error && !hasSearched && (
+          <SearchDescription
+            resultTitle='Start searching for images'
+            resultDescription='Enter a search term above to discover beautiful photos from Flickr'
+          />
         )}
 
         {!loading && photos.length === 0 && hasSearched && !error && (
-          <div className="text-center py-8 sm:py-12">
-            <div className="max-w-md mx-auto">
-              <div className="w-16 h-16 sm:w-24 sm:h-24 mx-auto mb-4 bg-gray-100 rounded-full flex items-center justify-center">
-                <svg className="w-8 h-8 sm:w-12 sm:h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-base sm:text-lg font-medium text-gray-900 mb-2">No images found</h3>
-              <p className="text-sm sm:text-base text-gray-500">No photos were found for your search term. Try a different keyword.</p>
-            </div>
-          </div>
+          <SearchDescription
+            resultTitle='No images found'
+            resultDescription='No photos were found for your search term. Try a different keyword.'
+          />
         )}
 
         {/* Pinterest-style Image Grid */}

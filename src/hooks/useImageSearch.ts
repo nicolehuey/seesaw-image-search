@@ -59,7 +59,6 @@ export const useImageSearch = () => {
 
       const apiPath = `https://api.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&text=${encodeURIComponent(query)}&format=json&nojsoncallback=1&per_page=30&sort=relevance&page=${page}`
 
-      console.log('API URL:', apiPath);
       const response = await fetch(apiPath);
 
       if (!response.ok) {

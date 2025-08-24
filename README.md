@@ -117,22 +117,12 @@ This project uses Tailwind CSS for styling:
 ### Available Scripts
 - `npm start` - Start development server
 - `npm run build` - Build for production
-- `npm test` - Run tests
 - `npm run eject` - Eject from Create React App
 
 ### Code Quality
 - TypeScript for type safety
 - ESLint for code linting
 - Prettier for code formatting
-
-## 🎯 Future Enhancements
-
-- [ ] Add image categories and filters
-- [ ] Implement image collections/saved images
-- [ ] Add social sharing functionality
-- [ ] Implement advanced search filters
-- [ ] Add image upload functionality
-- [ ] Implement user accounts and favorites
 
 ## 📄 License
 
