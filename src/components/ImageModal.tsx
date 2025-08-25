@@ -15,32 +15,26 @@ const ImageModal: React.FC<ImageModalProps> = ({ photo, isOpen, onClose }) => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      onClose();
-    }
-  };
-
   const handleDownload = async () => {
     try {
       const downloadUrl = getLargeImageUrl(photo);
-      
+
       // Fetch the image as a blob
       const response = await fetch(downloadUrl);
       const blob = await response.blob();
-      
+
       // Create a blob URL
       const blobUrl = window.URL.createObjectURL(blob);
-      
+
       // Create download link
       const link = document.createElement('a');
       link.href = blobUrl;
       link.download = `${photo.title || 'flickr-image'}-${photo.id}.jpg`;
-      
+
       // Trigger download
       document.body.appendChild(link);
       link.click();
-      
+
       // Cleanup
       document.body.removeChild(link);
       window.URL.revokeObjectURL(blobUrl);
@@ -62,7 +56,6 @@ const ImageModal: React.FC<ImageModalProps> = ({ photo, isOpen, onClose }) => {
     <div
       className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-75 p-2 sm:p-4"
       onClick={handleBackdropClick}
-      onKeyDown={handleKeyDown}
       tabIndex={-1}
       role="dialog"
       aria-modal="true"

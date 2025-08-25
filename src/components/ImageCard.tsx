@@ -33,26 +33,26 @@ const ImageCard: React.FC<ImageCardProps> = ({ photo, onClick }) => {
 
   const handleDownload = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent modal from opening
-    
+
     try {
       const downloadUrl = getDownloadUrl(photo);
-      
+
       // Fetch the image as a blob
       const response = await fetch(downloadUrl);
       const blob = await response.blob();
-      
+
       // Create a blob URL
       const blobUrl = window.URL.createObjectURL(blob);
-      
+
       // Create download link
       const link = document.createElement('a');
       link.href = blobUrl;
       link.download = `${photo.title || 'flickr-image'}-${photo.id}.jpg`;
-      
+
       // Trigger download
       document.body.appendChild(link);
       link.click();
-      
+
       // Cleanup
       document.body.removeChild(link);
       window.URL.revokeObjectURL(blobUrl);
@@ -78,7 +78,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ photo, onClick }) => {
   }, [photo]);
 
   return (
-    <div 
+    <div
       className="group relative bg-white cursor-pointer rounded-lg overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 transform hover:scale-[1.02]"
       onClick={handleCardClick}
       role="button"
@@ -107,7 +107,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ photo, onClick }) => {
             <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-600"></div>
           </div>
         )}
-        
+
         {/* Error state */}
         {imageError && (
           <div className="w-full h-64 bg-gray-100 flex items-center justify-center">
@@ -119,21 +119,20 @@ const ImageCard: React.FC<ImageCardProps> = ({ photo, onClick }) => {
             </div>
           </div>
         )}
-        
+
         {/* Single image with progressive loading */}
         {currentImageUrl && !imageError && (
           <img
             src={currentImageUrl}
             alt={photo.title || 'Flickr photo'}
-            className={`w-full h-auto object-cover transition-opacity duration-500 ${
-              imageLoading ? 'opacity-0 absolute inset-0' : 'opacity-100'
-            }`}
+            className={`w-full h-auto object-cover transition-opacity duration-500 ${imageLoading ? 'opacity-0 absolute inset-0' : 'opacity-100'
+              }`}
             loading="lazy"
             onLoad={handleImageLoad}
             onError={handleImageError}
           />
         )}
-        
+
         {/* Hover overlay with view indicator */}
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300 flex items-center justify-center">
           <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white bg-opacity-90 rounded-full p-3">
@@ -143,7 +142,7 @@ const ImageCard: React.FC<ImageCardProps> = ({ photo, onClick }) => {
           </div>
         </div>
       </div>
-      
+
       {/* Image info */}
       {photo.title && (
         <div className="p-3">
