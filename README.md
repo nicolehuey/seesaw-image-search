@@ -60,7 +60,6 @@ Deployed at: https://seesaw-image-search.vercel.app/
 - **Save Button on Hover**: Click the "Save" button that appears on hover over any image
 - **Modal Download**: Download full-size images from the modal view
 - **Direct Download**: Images download directly to your device without opening new tabs
-- **Smart Filenames**: Downloads use meaningful filenames based on image title and ID
 
 ### User Experience
 - **Infinite Scroll**: Automatically loads more images as you scroll down
